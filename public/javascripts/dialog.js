@@ -1,5 +1,5 @@
 var cotorra = {
-    welcome: 'Bienvenido al sistema de lectura de documento Movistar Chile',
+    welcome: 'Bienvenido al sistema de lectura de documentos digitales',
     explanation: 'Para iniciar el sistema debe cargar un documento PDF para una Boleta o un Contrato de Servicios',
     thk: "Gracias!!"
 };
