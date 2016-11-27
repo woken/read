@@ -11,16 +11,17 @@
     "debug": "~2.1.1",
     "ejs": "~2.3.2",
     "express": "~4.12.0",
+    "express-browserify": "^1.0.2",
     "google-tts-api": "0.0.1 ",
     "isobject": "2.1.0 ",
     "jade": "~1.9.2",
     "morgan": "~1.5.1",
     "multiparty": "4.1.2",
+    "mv": "^2.1.1",
     "pdf-textstring": "0.0.7",
     "request": "2.72.0",
     "serve-favicon": "~2.2.0",
-    "watson-developer-cloud": "^1.4.1",
     "string": "3.3.1",
-    "express-browserify": "^1.0.2"
+    "watson-developer-cloud": "^1.4.1"
   }
 }

@@ -53,6 +53,51 @@
 										</div>
 										</br>
 										</br>
+
+										<!-- ********************************************* -->
+
+										<div class="row">
+											<nav class="navbar navbar-inverse">
+												<ul class="navbar-text">
+													<button id="recordButton" class="btn btn-primary">Escuchar</button>
+												</ul>
+											</nav>
+										</div>
+
+										<!-- ********************************************* -->
+
+										<div style="padding:0;margin-top:1em;">
+											<canvas id="canvas" width="960" height="368"/>
+											</canvas>
+											<div id="confusion-networks">
+<!-- 												<div id="canvas-placeholder">
+													Word Alternatives will appear shortly after audio transcription is started
+												</div> -->
+												<input id="vslider" type="range" orient="vertical"/>
+											</div>
+											<input id="hslider" type="range" style="display:none !important;"/>
+										<!-- 	<img id="left-arrow" src="#"/>
+											<img id="right-arrow" src="#"/> -->
+										</div>
+
+										<div class="form-group row tabpanel-row">
+											<div class="col-lg-12">
+												<div class="tab-content">
+													<div role="tabpanel" class="tab-pane active" id="home2">
+														<textarea readonly id="resultsText" dir="auto"></textarea>
+													</div>
+													<div role="tabpanel" class="tab-pane" id="profile2">
+														<textarea readonly id="resultsJSON"></textarea>
+													</div>
+												</div>
+											</div><!-- .col-lg-12 -->
+										</div>
+
+										<!-- ******************************************** -->
+
+										<input id="recordbutton" type="button" name="recordbutton" class="btn btn-primary" value="record voz">
+
+										<br>
 										<input id="record" type="button" name="record" class="btn btn-primary" value="Comando de Voz">
 										<input id="record_stop" type="button" name="record" class="btn btn-primary" value="Fin de comando">
 									</div>
@@ -71,7 +116,7 @@
 									</select>	
 								</div>
 
-								<img id="loading" src="http://www.linguae.com/images/loading/loading52.gif" height="50" width="50" alt="" style="display:none">
+								<img id="loading" src="#" height="50" width="50" alt="" style="display:none">
 								<div id="object_pdf"></div>
 								</div>
 							</div>
@@ -94,6 +139,7 @@
 						<script src="javascripts/dialog.js"></script>
 						<script src="javascripts/talk.js"></script>
 						<script src="javascripts/conductor.js"></script>
+						<script src="javascripts/lister_user.js"></script>
 						<div id="tts_audio"></div>
 					</body>
 				</html>

@@ -78,7 +78,7 @@ function tell_me_the_function(texts) {
             lists = talk_multi(texts);
 
             for (var i = 0; i < boleta.length; i++) {
-                $('#action').append('<a href="#" class="btn btn-lg active" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + boleta[i + 1].toUpperCase() + '</a>');
+                $('#action').append('<a href="#" class="btn btn-lg active" name="'+lists[i].id+'" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + boleta[i + 1].toUpperCase() + '</a>');
             }
             break;
         case 'contrato':
@@ -86,7 +86,7 @@ function tell_me_the_function(texts) {
             lists = talk_multi(texts);
             for (var i = 1; i < contrato.length; i++) {
                 if (typeof lists[i].id !== undefined) {
-                    $('#action').append('<a href="#" class="btn btn-lg active" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + contrato[i + 1].toUpperCase() + '</a>');
+                    $('#action').append('<a href="#" class="btn btn-lg active" name="'+lists[i].id+'" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + contrato[i + 1].toUpperCase() + '</a>');
                 }
             }
             break;

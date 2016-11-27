@@ -14,12 +14,13 @@ var extend = require('util')._extend;
 var vcapServices = require('vcap_services');
 var expressBrowserify = require('express-browserify');
 var csrf = require('csurf')
+var mv = require('mv');
 
 var config_speech_to_text = extend({
   version: 'v1',
   url: 'https://stream.watsonplatform.net/speech-to-text/api',
-  username: '6b1a9a7c-00dc-4bfa-8827-51c57891c8e8',
-  password: 'LvE8SCPAvUqg'
+  username: '0f056a4e-ef6a-4747-aa23-054863e11895',
+  password: '2xAiEoIX5iVX'
 }, vcapServices.getCredentials('speech_to_text'));
 
 var authService = watson.authorization(config_speech_to_text);
@@ -62,8 +63,8 @@ router.get('/tts', function(req, res, next) {
 
   if (text != "") {
     var text_to_speech = watson.text_to_speech({
-      username: '9d6abbe0-dc0f-4a63-b535-ae13cd0acdb8',
-      password: 'xTaVQCGNjXC6',
+      username: 'fc3812d7-904d-4024-abac-396657a2ef2f',
+      password: 'w7QUdDrDr4Hm',
       version: 'v1'
     });
 
@@ -118,22 +119,37 @@ router.post('/load-pdf', function(req, res, next) {
                 text.push(data.match(/FECHA DE EMISIÓN.*:(.*)(\d*)\-\w*\-(\d*)/g).pop().replace(':', '').replace(/ÚLTIMO PAGO:(.*)/, '').replace(/\s\s+/g, ' '));
                 text.push(data.match(/ÚLTIMO PAGO:(.*)\n.*/g).pop().replace(':', ' ').replace(/\s\s+/g, ' ').replace(/\$/g, ''));
                 text.push(data.match(/CARGOS DEL PERIODO(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
-                cliente +=data.match(/Cliente\s+\:(.*)\w/g).pop().replace('BOLETA ELECTRONICA', '').replace(':', '')+ '\n';
-                cliente +=data.match(/RUT(.*)/g).pop().replace(':', '')+ '\n';
-                cliente +=data.match(/Giro(.*)/g).pop().replace(':', '')+ '\n';
-                cliente +=data.match(/Código Cliente(.*)/g).pop().replace(':', '')+ '\n';
-                cliente +=data.match(/Dirección(.*)/g).pop().replace(':', '')+ '\n';
-                cliente +=data.match(/Comuna \- Ciudad (.*)/g).pop().replace(':', '')+ '\n';
-                cliente +=data.match(/Dirección Postal(.*)/g).pop().replace(':', '')+ '\n';
-                cliente +=data.match(/Nº Celular(.*)\s+\:\s*[0-9]{9,9}/g).pop().replace(':', '')+ '\n';
+                cliente += data.match(/Cliente\s+\:(.*)\w/g).pop().replace('BOLETA ELECTRONICA', '').replace(':', '') + '\n';
+                cliente += data.match(/RUT(.*)/g).pop().replace(':', '') + '\n';
+                cliente += data.match(/Giro(.*)/g).pop().replace(':', '') + '\n';
+                cliente += data.match(/Código Cliente(.*)/g).pop().replace(':', '') + '\n';
+                cliente += data.match(/Dirección(.*)/g).pop().replace(':', '') + '\n';
+                cliente += data.match(/Comuna \- Ciudad (.*)/g).pop().replace(':', '') + '\n';
+                cliente += data.match(/Dirección Postal(.*)/g).pop().replace(':', '') + '\n';
+                cliente += data.match(/Nº Celular(.*)\s+\:\s*[0-9]{9,9}/g).pop().replace(':', '') + '\n';
                 text.push(cliente.replace(/\s\s+/g, ' '));
                 text.push('Correo Electrónico ' + data.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,3}/g).pop());
                 debug(text);
               }
 
+              console.log("*************************");
               response.status = true;
               response.code = 200;
-              fs.renameSync(files.pdf[0].path, './public/pdf/' + files.pdf[0].originalFilename);
+              console.log(files);
+              console.log('./public/pdf/' + files.pdf[0].originalFilename);
+              console.log("*************************");
+
+              //fs.renameSync(files.pdf[0].path, './public/pdf/' + files.pdf[0].originalFilename);
+
+
+              mv(files.pdf[0].path, './public/pdf/' + files.pdf[0].originalFilename, function(err) {
+                if (err) {
+                  throw err;
+                }
+                console.log('file moved successfully');
+              });
+
+
               response.data = {
                 name: files.pdf[0].originalFilename,
                 type: files.pdf[0].originalFilename.substr(-3, 3).toLowerCase(),
