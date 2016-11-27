@@ -1924,8 +1924,10 @@ function onTimer() {
 }
 
 exports.showResult = function(msg, baseString, model) {
+
   if (msg.results && msg.results.length > 0) {
     //var alternatives = msg.results[0].alternatives;
+
     var text = msg.results[0].alternatives[0].transcript || '';
 
     // apply mappings to beautify
@@ -1967,10 +1969,10 @@ exports.showResult = function(msg, baseString, model) {
         text = text.trim() + '. ';
       }
       baseString += text;
-      $('#resultsText').val(baseString);
 
-      
-      clickRead(baseString);
+      $('#resultsText').val(text);
+
+      clickRead(text);
 
 
     }
@@ -2037,10 +2039,10 @@ function clickRead(valueSpeech) {
     console.log(indexFinal);
     console.log("......................");
 
-    if (match > 3) { 
+    if (match.length > 3) { 
       tell_me_the_document(arrBtn[indexFinal], indexFinal);
     }else {
-      console.log("::::::  falso positivo :::::::::");
+      console.log(":::::: falso positivo :::::::::");
     }
 
     $("#resultsText").val("");;
