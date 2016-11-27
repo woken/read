@@ -51,7 +51,7 @@ var boleta_honorarios = [
     //'Datos del cliente',
     //'Correo Electrónico'
 ];
-var boleta = [
+var boleta_movistar = [
     'Ingreso un documento de boleta, a continuación puede acceder a los siguiente puntos de interés',
     'TOTAL A PAGAR',
     'Fecha de Vencimiento',

@@ -73,12 +73,12 @@ function tell_me_the_function(texts) {
     $("#action a").remove();
     $("#tts_audio audio").remove();
     switch ($('#type_document').val()) {
-        case 'boleta':
-            talk_me(boleta);
+        case 'boleta_movistar':
+            talk_me(boleta_movistar);
             lists = talk_multi(texts);
 
-            for (var i = 0; i < boleta.length; i++) {
-                $('#action').append('<a href="#" class="btn btn-lg active" name="'+lists[i].id+'" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + boleta[i + 1].toUpperCase() + '</a>');
+            for (var i = 0; i < boleta_movistar.length; i++) {
+                $('#action').append('<a href="#" class="btn btn-lg active" name="'+lists[i].id+'" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + boleta_movistar[i + 1].toUpperCase() + '</a>');
             }
             break;
         case 'contrato':

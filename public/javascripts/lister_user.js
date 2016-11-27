@@ -2037,9 +2037,13 @@ function clickRead(valueSpeech) {
     console.log(indexFinal);
     console.log("......................");
 
+    if (match > 3) { 
+      tell_me_the_document(arrBtn[indexFinal], indexFinal);
+    }else {
+      console.log("::::::  falso positivo :::::::::");
+    }
 
-    tell_me_the_document(arrBtn[indexFinal], indexFinal);
-
+    $("#resultsText").val("");;
 }
 
 function getMatch(a, b){

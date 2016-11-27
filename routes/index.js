@@ -110,7 +110,7 @@ router.post('/load-pdf', function(req, res, next) {
                   return n != ''
                 });
               }
-              if (fields.type_document[0] == 'boleta') {
+              if (fields.type_document[0] == 'boleta_movistar') {
                 text = new Array;
                 var cliente = '';
                 text.push(data.match(/TOTAL A PAGAR(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
