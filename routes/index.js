@@ -110,7 +110,6 @@ router.post('/load-pdf', function(req, res, next) {
                   return n != ''
                 });
               }
-
               if (fields.type_document[0] == 'boleta') {
                 text = new Array;
                 var cliente = '';
@@ -132,7 +131,125 @@ router.post('/load-pdf', function(req, res, next) {
                 debug(text);
               }
 
-              console.log("*************************");
+              if (fields.type_document[0] == 'boleta_NIC') {
+
+                var elec = data;
+                var q = elec.search("Servicios");
+
+                console.log("*******");
+                console.log(elec[q]);
+                console.log("*******");
+                var w = elec.search("Miraflores");
+                elec = elec.slice(q, w);
+                console.log("*******");
+                console.log(elec);
+                console.log("*******");
+                elec = elec.replace("Servicios","");
+                elec = elec.replace("°","");
+                elec = elec.replace("N","");
+                elec = elec.trim();
+                text = new Array;
+                var cliente = '';
+                text.push("Numero boleta "+elec);
+                text.push(data.match(/SEÑOR(.*)/g).pop().replace('(ES):', '').replace(/\s\s+/g, ' '));
+                text.push(data.match(/DIRECCIÓN:(.*)/g).pop().replace('Tel:+56.967425817', '').replace(/\s\s+/g, ' '));
+                text.push(data.match(/Total(.*)/g).pop().replace('Tel:+56.967425817', '').replace(/\s\s+/g, ' '));
+
+
+               // text.push(data.match(/Fecha de Vencimiento(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+               // text.push(data.match(/FECHA DE EMISIÓN.*:(.*)(\d*)\-\w*\-(\d*)/g).pop().replace(':', '').replace(/ÚLTIMO PAGO:(.*)/, '').replace(/\s\s+/g, ' '));
+               // text.push(data.match(/ÚLTIMO PAGO:(.*)\n.*/g).pop().replace(':', ' ').replace(/\s\s+/g, ' ').replace(/\$/g, ''));
+               // text.push(data.match(/CARGOS DEL PERIODO(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+               // cliente +=data.match(/Cliente\s+\:(.*)\w/g).pop().replace('BOLETA ELECTRONICA', '').replace(':', '')+ '\n';
+               // cliente +=data.match(/RUT(.*)/g).pop().replace(':', '')+ '\n';
+               // cliente +=data.match(/Giro(.*)/g).pop().replace(':', '')+ '\n';
+               // cliente +=data.match(/Código Cliente(.*)/g).pop().replace(':', '')+ '\n';
+               // cliente +=data.match(/Dirección(.*)/g).pop().replace(':', '')+ '\n';
+               // cliente +=data.match(/Comuna \- Ciudad (.*)/g).pop().replace(':', '')+ '\n';
+               // cliente +=data.match(/Dirección Postal(.*)/g).pop().replace(':', '')+ '\n';
+               // cliente +=data.match(/Nº Celular(.*)\s+\:\s*[0-9]{9,9}/g).pop().replace(':', '')+ '\n';
+               // text.push(cliente.replace(/\s\s+/g, ' '));
+               // text.push('Correo Electrónico ' + data.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,3}/g).pop());
+                debug(text);
+              }
+
+              if (fields.type_document[0] == 'boleta_honorarios') {
+
+                var nombre = data;
+                var n = nombre.search("ELECTRONICA");
+                nombre = nombre.slice(1, n);
+                nombre = nombre.replace("BOLETA DE HONORARIOS","");
+                nombre = nombre.trim();
+                
+                var giro = data;
+                var m = giro.search(".,");
+                var c = giro.search("GIRO");
+                console.log("145************");
+                console.log(c);
+                console.log(m);
+
+                console.log(giro[c]);
+                console.log(giro[m]);
+
+                console.log("148************");
+                giro = giro.slice(c,m);
+                console.log("151************");
+                console.log(giro);
+                giro=giro.replace("GIRO(S):","").trim();
+                console.log("153************");
+
+                var numero = data;
+                var b = numero.search("ELECTRONICA");
+                var x = numero.search("RUT");
+                numero = numero.slice(b,x);
+                numero = numero.replace("°","");
+                numero = numero.replace("N","");
+                numero = numero.trim();
+                console.log("*******");
+                console.log(numero);
+                console.log("*******");
+
+
+
+
+                text = new Array;
+
+
+                var cliente = '';
+                //text.push(data);
+                text.push("Nombre "+nombre);
+                text.push("Giro "+giro);
+
+                //text.push(data.match(/GIRO (.*)/g).pop().replace(':', '')+ '\n');
+                text.push(data.match(/Total(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                text.push(data.match(/RUT:(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                //text.push(data.match(/FECHA DE EMISIÓN.*:(.*)(\d*)\-\w*\-(\d*)/g).pop().replace(':', '').replace(/ÚLTIMO PAGO:(.*)/, '').replace(/\s\s+/g, ' '));
+                text.push(data.match(/Fecha:(.*)\n.*/g).pop().replace(':', ' ').replace(/\s\s+/g, ' ').replace(/\$/g, ''));
+                text.push(data.match(/Por atención profesional:(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                text.push(data.match(/Total Honorarios(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                text.push(data.match(/Retenido:(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                text.push("Numero boleta "+numero);
+                //text.push(data.match(/n(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                
+                //text.push(data.match(/Por atención profesional:(.*)/g).pop().replace(':', '').replace(/\s\s+/g, ' '));
+                //cliente +=data.match(/Cliente\s+\:(.*)\w/g).pop().replace('BOLETA ELECTRONICA', '').replace(':', '')+ '\n';
+                //cliente +=data.match(/Total Honorarios(.*)/g).pop().replace(':', '')+ '\n';
+                //cliente +=data.match(/Giro(.*)/g).pop().replace(':', '')+ '\n';
+                //cliente +=data.match(/Código Cliente(.*)/g).pop().replace(':', '')+ '\n';
+                //cliente +=data.match(/Dirección(.*)/g).pop().replace(':', '')+ '\n';
+                //cliente +=data.match(/Comuna \- Ciudad (.*)/g).pop().replace(':', '')+ '\n';
+                //cliente +=data.match(/Dirección Postal(.*)/g).pop().replace(':', '')+ '\n';
+                //cliente +=data.match(/Nº Celular(.*)\s+\:\s*[0-9]{9,9}/g).pop().replace(':', '')+ '\n';
+                //text.push(cliente.replace(/\s\s+/g, ' '));
+                //text.push('Correo Electrónico ' + data.match(/[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,3}/g).pop());
+                debug(text);
+                console.log("************");
+                console.log(text);
+
+                console.log("************");
+
+              }
+
               response.status = true;
               response.code = 200;
               console.log(files);
