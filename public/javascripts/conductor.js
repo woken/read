@@ -89,7 +89,22 @@ function tell_me_the_function(texts) {
                     $('#action').append('<a href="#" class="btn btn-lg active" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + contrato[i + 1].toUpperCase() + '</a>');
                 }
             }
+        case 'boleta_honorarios':
+            talk_me(boleta_honorarios);
+            lists = talk_multi(texts);
+
+            for (var i = 0; i < boleta_honorarios.length; i++) {
+                $('#action').append('<a href="#" class="btn btn-lg active" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + boleta_honorarios[i + 1].toUpperCase() + '</a>');
+            }    
             break;
+        case 'boleta_NIC':
+            talk_me(boleta_NIC);
+            lists = talk_multi(texts);
+
+            for (var i = 0; i < boleta_NIC.length; i++) {
+                $('#action').append('<a href="#" class="btn btn-lg active" onclick="tell_me_the_document(' + "'" + lists[i].id + "', '" + i + "'" + ')" id ="' + i + '" alt="false">' + boleta_NIC[i + 1].toUpperCase() + '</a>');
+            }    
+            break;    
     }
 }
 
